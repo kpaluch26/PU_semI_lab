@@ -1,4 +1,5 @@
 ﻿using CQRS;
+using CQRS.Authors;
 using Microsoft.AspNetCore.Mvc;
 using Model.DTO;
 using System;
@@ -21,22 +22,64 @@ namespace ProgramowanieUzytkoweIP12.Controllers
             this.queryBus = queryBus;
         }
 
-        [HttpGet]
-        public List<BookDTO> Get([FromQuery] GetBooksQuery query)
+        [HttpGet("/CQRS/books")]
+        public List<BookDTO> GetBooks([FromQuery] GetBooksQuery query)
         {
             return queryBus.Handle<GetBooksQuery, List<BookDTO>>(query);
         }
 
-        [HttpPost]
+        [HttpPost("/CQRS/book/add")]
         public void Post([FromBody] AddBookCommand command)
         {
             commandBus.Handle(command);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("/CQRS/book/delete/{id}")]
         public void Delete(int id)
         {
             commandBus.Handle(new DeleteBookCommand(id));
+        }
+
+        [HttpGet("/CQRS/book")]
+        public BookDTO GetBook([FromQuery] GetBookQuery query)
+        {
+            return queryBus.Handle<GetBookQuery, BookDTO>(query);
+        }
+
+        [HttpPost("/CQRS/book/rate/add")]
+        public void AddRateToBook(int index, int rate)
+        {
+            commandBus.Handle(new AddRateToBookCommand(index, rate));
+        }
+
+        [HttpGet("/CQRS/authors")]
+        public List<AuthorDTO> GetAuthors([FromQuery] GetAuthorsQuery query)
+        {
+            return queryBus.Handle<GetAuthorsQuery, List<AuthorDTO>>(query);
+        }
+
+        [HttpPost("/CQRS/author/add")]
+        public void AddAuthor([FromBody] AddAuthorCommand command)
+        {
+            commandBus.Handle(command);
+        }
+
+        [HttpDelete("/CQRS/author/delete/{id}")]
+        public void DeleteAuthor(int id)
+        {
+            commandBus.Handle(new DeleteAuthorCommand(id));
+        }
+
+        [HttpPost("/CQRS/author/rate/add")]
+        public void AddRateToAuthor(int index, int rate)
+        {
+            commandBus.Handle(new AddRateToAuthorCommand(index, rate));
+        }
+
+        [HttpGet("/CQRS/author")]
+        public AuthorDTO GetAuthor([FromQuery] GetAuthorQuery query)
+        {
+            return queryBus.Handle<GetAuthorQuery, AuthorDTO>(query);
         }
     }
 }
