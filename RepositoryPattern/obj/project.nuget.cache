@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Qkws3WDD2eW/mfq2U54voDthAULTHEQXZegZV/ZkJ5th2zGoRNJXBT+nOIz0mzBY2Ym3i4uacenPkSaHUEjQSQ==",
+  "dgSpecHash": "y4ww6B67GsNXraUngjXThKZhcY3Vj9GHln1h5uTgFHYd+PVRLEtjnp19o57DVLoA5QTTJgnXd2EOBXhvVUQMAw==",
   "success": true,
   "projectFilePath": "D:\\studia_II_stopien\\PU\\LAB\\LAB_1\\ProgramowanieUzytkoweIP12\\RepositoryPattern\\RepositoryPattern.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\kamil\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\kamil\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\9.0.0\\mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
     "C:\\Users\\kamil\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.11\\microsoft.data.sqlite.core.5.0.11.nupkg.sha512",
     "C:\\Users\\kamil\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
     "C:\\Users\\kamil\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.11\\microsoft.entityframeworkcore.5.0.11.nupkg.sha512",

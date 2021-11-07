@@ -1,5 +1,6 @@
 using CQRS;
 using CQRS.Authors;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Model;
 using Model.DTO;
 using RepositoryPattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,6 +50,10 @@ namespace ProgramowanieUzytkoweIP12
             services.AddScoped<ICommandHandler<AddAuthorCommand>, AddAuthorCommandHandler>();
             services.AddScoped<ICommandHandler<AddRateToAuthorCommand>, AddRateToAuthorCommandHandler>();
             services.AddScoped<ICommandHandler<DeleteAuthorCommand>, DeleteAuthorCommandHandler>();
+            //MediatR
+            var mediatR = AppDomain.CurrentDomain.Load("MediatRCQRS");
+            services.AddMediatR(mediatR);
+
             services.AddControllers(); 
             services.AddSwaggerGen(); //konfiguracja swaggera
         }

@@ -34,6 +34,9 @@
       "ProgramowanieUzytkoweIP12/1.0.0": {
         "dependencies": {
           "CQRS": "1.0.0",
+          "MediatR": "9.0.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "9.0.0",
+          "MediatRCQRS": "1.0.0",
           "Model": "1.0.0",
           "RepositoryPattern": "1.0.0",
           "Swashbuckle.AspNetCore": "6.2.2",
@@ -324,6 +327,32 @@
         },
         "compile": {
           "ProgramowanieUzytkoweIP12.dll": {}
+        }
+      },
+      "MediatR/9.0.0": {
+        "runtime": {
+          "lib/netstandard2.1/MediatR.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/MediatR.dll": {}
+        }
+      },
+      "MediatR.Extensions.Microsoft.DependencyInjection/9.0.0": {
+        "dependencies": {
+          "MediatR": "9.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "Microsoft.Data.Sqlite.Core/5.0.11": {
@@ -684,6 +713,8 @@
       "System.Memory/4.5.3": {},
       "CQRS/1.0.0": {
         "dependencies": {
+          "MediatR": "9.0.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "9.0.0",
           "Model": "1.0.0"
         },
         "runtime": {
@@ -693,8 +724,23 @@
           "CQRS.dll": {}
         }
       },
+      "MediatRCQRS/1.0.0": {
+        "dependencies": {
+          "MediatR": "9.0.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "9.0.0",
+          "Model": "1.0.0"
+        },
+        "runtime": {
+          "MediatRCQRS.dll": {}
+        },
+        "compile": {
+          "MediatRCQRS.dll": {}
+        }
+      },
       "Model/1.0.0": {
         "dependencies": {
+          "MediatR": "9.0.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "9.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "5.0.11"
         },
         "runtime": {
@@ -2409,6 +2455,20 @@
       "serviceable": false,
       "sha512": ""
     },
+    "MediatR/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8b3UYNxegHVYcJMG2zH8wn+YqxLvXG+eMfj0cMCq/jTW72p6O3PCKMkrIv0mqyxdW7bA4gblsocw7n+/9Akg5g==",
+      "path": "mediatr/9.0.0",
+      "hashPath": "mediatr.9.0.0.nupkg.sha512"
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-msreY4ogiPdIRWiCQVHQDytIQpsZCLWsixWPZ+Xs86KZrvtuiV8BDHbIT0kBmogynVYWNpspb3caw+86YU8L6w==",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/9.0.0",
+      "hashPath": "mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512"
+    },
     "Microsoft.Data.Sqlite.Core/5.0.11": {
       "type": "package",
       "serviceable": true,
@@ -2634,6 +2694,11 @@
       "hashPath": "system.memory.4.5.3.nupkg.sha512"
     },
     "CQRS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MediatRCQRS/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

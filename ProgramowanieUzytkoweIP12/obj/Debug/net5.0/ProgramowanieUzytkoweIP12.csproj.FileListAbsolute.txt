@@ -58,4 +58,8 @@ D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkow
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\bin\Debug\net5.0\CQRS.dll
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\bin\Debug\net5.0\CQRS.pdb
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\obj\Debug\net5.0\ProgramowanieUzytkoweIP12.MvcApplicationPartsAssemblyInfo.cs
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\bin\Debug\net5.0\MediatR.dll
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\bin\Debug\net5.0\MediatRCQRS.dll
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\bin\Debug\net5.0\MediatRCQRS.pdb
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\ProgramowanieUzytkoweIP12\obj\Debug\net5.0\ProgramowanieUzytkoweIP12.csproj.CopyComplete

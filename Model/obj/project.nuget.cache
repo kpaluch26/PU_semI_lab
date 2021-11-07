@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7FbHB3vd3oskZPS3X/IwGLzhzv4NyPPPkSzyutAdeVSayd7zDpl4KPm+CRyvcqKVJICYvYwHLbJgg4Z4iqYprg==",
+  "dgSpecHash": "OCxqxI2c3TbORZGu9dM2QLO3O7gAQWNWl8xuFCWxENZ5L+08AD92V7Vy7gkQ3BEqAijJ8eEcRrey9MQx/lgOKA==",
   "success": true,
   "projectFilePath": "D:\\studia_II_stopien\\PU\\LAB\\LAB_1\\ProgramowanieUzytkoweIP12\\Model\\Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kamil\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\kamil\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\kamil\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\9.0.0\\mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
     "C:\\Users\\kamil\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\kamil\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.11\\microsoft.data.sqlite.core.5.0.11.nupkg.sha512",
     "C:\\Users\\kamil\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
