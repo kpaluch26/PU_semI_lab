@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Model;
 using Model.DTO;
+using Nest;
+using ProgramowanieUzytkoweIP12.ElasticModels;
 using RepositoryPattern;
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,9 @@ namespace ProgramowanieUzytkoweIP12
             var mediatR = AppDomain.CurrentDomain.Load("MediatRCQRS");
             services.AddMediatR(mediatR);
 
+            //Elastic model
+            services.AddScoped<IElasticClient>(x => new ElasticClient(new ElasticConnection(new Uri("http://localhost:9200"))));
+            
             services.AddControllers(); 
             services.AddSwaggerGen(); //konfiguracja swaggera
         }

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS", "CQRS\CQRS.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRCQRS", "MediatR\MediatRCQRS.csproj", "{2052A0A3-BC5E-42EB-8766-39E71466B015}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_Blazor", "GUI_Blazor\GUI_Blazor.csproj", "{25386507-D4A6-4AC4-8520-5DFFC520DC80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2052A0A3-BC5E-42EB-8766-39E71466B015}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2052A0A3-BC5E-42EB-8766-39E71466B015}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2052A0A3-BC5E-42EB-8766-39E71466B015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25386507-D4A6-4AC4-8520-5DFFC520DC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25386507-D4A6-4AC4-8520-5DFFC520DC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25386507-D4A6-4AC4-8520-5DFFC520DC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25386507-D4A6-4AC4-8520-5DFFC520DC80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
