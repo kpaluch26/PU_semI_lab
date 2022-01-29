@@ -43,7 +43,7 @@ namespace RepositoryPattern
             {
                 ID = b.Id,
                 ReleaseDate = b.ReleaseDate,
-                AvarageRate = b.Rates.Count > 0 ? b.Rates.Average(r => r.Value) : 0,
+                AvarageRate = b.Rates.Count > 0 ? Math.Round(b.Rates.Average(r => r.Value), 2) : 0,
                 RatesCount = b.Rates.Count,
                 Title = b.Title,
                 Authors = b.Authors.Select(a => new BookAuthorDTO
@@ -61,7 +61,7 @@ namespace RepositoryPattern
             {
                 ID = b.Id,
                 ReleaseDate = b.ReleaseDate,
-                AvarageRate = b.Rates.Count > 0 ? b.Rates.Average(r => r.Value) : 0,
+                AvarageRate = b.Rates.Count > 0 ? Math.Round(b.Rates.Average(r => r.Value), 2) : 0,
                 RatesCount = b.Rates.Count,
                 Title = b.Title,
                 Authors = b.Authors.Select(a => new BookAuthorDTO

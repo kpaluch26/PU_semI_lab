@@ -48,7 +48,7 @@ namespace RepositoryPattern
             db.Authors.Add(new Author
             {
                 FirstName = author.FirstName,
-                SecondName = author.SecondName,
+                SecondName = author.SecondName
             });
             db.SaveChanges();
             return true;
@@ -58,7 +58,7 @@ namespace RepositoryPattern
         {
             var author = db.Authors.Where(x => x.Id == index).Single();
 
-            if(!author.Books.Any())
+            if(author.Books.Any())
             {
                 db.Authors.Remove(author);
                 db.SaveChanges();
@@ -83,7 +83,7 @@ namespace RepositoryPattern
                     Id = b.Id,
                     FirstName = b.FirstName,
                     SecondName = b.SecondName,
-                    AvarageRate = b.Rates.Count > 0 ? b.Rates.Average(r => r.Value) : 0,
+                    AvarageRate = b.Rates.Count > 0 ? Math.Round(b.Rates.Average(r => r.Value), 2) : 0,
                     RatesCount = b.Rates.Count,                    
                     Books = b.Books.Select(a => new AuthorBooksDTO
                     {
@@ -91,6 +91,60 @@ namespace RepositoryPattern
                         Title = a.Title
                     }).ToList()
                 }).ToList();
+        }
+
+        public AuthorDTO EditAuthor(int index, AuthorRequestDTO _authorRequestDTO)
+        {
+            var author = db.Authors.Include(x => x.Books).Where(x => x.Id == index).Single();
+            {
+                author.FirstName = _authorRequestDTO.FirstName;
+                author.SecondName = _authorRequestDTO.SecondName;
+            };
+            if (_authorRequestDTO.BooksId == null)
+            {
+                author.Books = new List<Book>();
+            }
+            else
+            {
+                author.Books = db.Books.Where(a => _authorRequestDTO.BooksId.Contains(a.Id)).ToList();
+            }
+            db.Authors.Update(author);
+            db.SaveChanges();
+
+            return new AuthorDTO
+            {
+                Id = author.Id,
+                Books = author.Books.Select(a => new AuthorBooksDTO
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                }).ToList(),
+                AvarageRate = (author.Rates.Count() > 0 ? author.Rates.Average(r => r.Value) : 0),
+                RatesCount = (author.Rates.Count() > 0 ? author.Rates.Count() : 0),
+                FirstName = author.FirstName,
+                SecondName = author.SecondName
+            };
+
+        }
+
+        public AuthorDTO GetAuthor(int id)
+        {
+            return db.Authors
+                .Include(b => b.Rates)
+                .Include(b => b.Books)
+                .Select(b => new AuthorDTO
+                {
+                    Id = b.Id,
+                    FirstName = b.FirstName,
+                    SecondName = b.SecondName,
+                    AvarageRate = b.Rates.Count > 0 ? Math.Round(b.Rates.Average(r => r.Value), 2) : 0,
+                    RatesCount = b.Rates.Count,
+                    Books = b.Books.Select(a => new AuthorBooksDTO
+                    {
+                        Id = a.Id,
+                        Title = a.Title
+                    }).ToList()
+                }).Where(b => b.Id == id).Single();
         }
     }
 }

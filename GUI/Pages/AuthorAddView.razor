@@ -1,0 +1,48 @@
+﻿<h3>Add author data</h3>
+@page "/authors/add"
+@using RepositoryPattern
+@using Model.DTO
+@using Radzen
+@using Radzen.Blazor
+@inject AuthorRepository authorRepository
+@inject BooksRepository booksRepository
+@inject NavigationManager navigatorManager
+
+
+<EditForm Model="author" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <label>First Name:</label>
+    <InputText @bind-Value="author.FirstName" />
+
+    <label>Second Name:</label>
+    <InputText @bind-Value="author.SecondName" />
+
+    <button>Add author</button>
+</EditForm>
+
+
+@code {
+
+    private AuthorDTO author = new AuthorDTO();
+
+    private void OnSubmit()
+    {
+        //List<AuthorBooksDTO> _books = new List<AuthorBooksDTO>();
+        //foreach(int _id in multipleValues)
+        //{
+        //    _books.Add(
+        //        new AuthorBooksDTO()
+        //        {
+        //            Id = _id,
+        //            Title = books.Single(b => b.ID == _id).Title
+        //        });
+        //}
+
+        //author.Books = _books;
+        authorRepository.CreateNewAuthor(author);
+        navigatorManager.NavigateTo($"/authors");
+    }
+
+}

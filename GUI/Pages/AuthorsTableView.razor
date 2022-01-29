@@ -1,0 +1,113 @@
+﻿<h3>@currentHeading</h3>
+@page "/authors"
+@using RepositoryPattern
+@using Model.DTO
+@inject AuthorRepository authorRepository
+@inject NavigationManager navigationManager
+
+@if (authors == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>SecondName</th>
+                <th>Books</th>
+                <th>AvarageRate</th>
+                <th>RatesCount</th>
+                <th>Rate author</th>
+                <th>Add book</th>
+                <th>Edit author</th>
+                <th>Delete author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var _author in authors)
+            {
+            <tr @onclick="()=> OnRowClicked(_author)">
+                <td>@_author.FirstName</td>
+                <td>@_author.SecondName</td>
+                <td>@GetBooks(_author)</td>
+                <td>@_author.AvarageRate</td>
+                <td>@_author.RatesCount</td>
+                <td>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        int x = i;
+                        <button @onclick="() => OnAddAuthorRates(_author,x)"><span class="oi oi-star"></span></button>
+                    }
+                </td>
+                <td><button type="button" @onclick="() =>OnAddBookToAuthor(_author)" class="oi oi-plus"></button></td>
+                <td><button type="button" @onclick="() =>OnEditAuthor(_author)" class="oi oi-cog"></button></td>
+                <td><button @onclick="()=>OnAuthorDelete(_author)"><span class="oi oi-trash"></span></button></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <button @onclick="() => OnAddAuthor()" class="btn btn-primary">Add Author</button>
+}
+@code {
+    private string currentHeading = "All available authors";
+    private List<AuthorDTO> authors;
+
+    protected override void OnInitialized()
+    {
+        authors = authorRepository.GetAuthors(new PaginationDTO(0, 100));
+    }
+
+    private void OnAddAuthorRates(AuthorDTO _authorDTO, int _rate)
+    {
+        bool _result = authorRepository.AddRateToAuthor(_authorDTO.Id, _rate);
+
+        if (_result)
+        {
+            authors = authorRepository.GetAuthors(new PaginationDTO(0, 100));
+            InvokeAsync(() => { this.StateHasChanged(); });
+        }
+    }
+
+    private string GetBooks(AuthorDTO _authorDTO)
+    {
+        var _bookList = _authorDTO.Books.Select(b => b.Title);
+        return string.Join(", ", _bookList);
+    }
+
+    private void OnAuthorDelete(AuthorDTO _authorDTO)
+    {
+        bool _result = authorRepository.DeleteAuthor(_authorDTO.Id);
+
+        if (_result)
+        {
+            authors.Remove(_authorDTO);
+            InvokeAsync(() => { this.StateHasChanged(); });
+        }
+    }
+
+    private void OnRowClicked(AuthorDTO _authorDTO)
+    {
+        currentHeading = "Selected author: " + _authorDTO.FirstName.Trim() + " " + _authorDTO.SecondName.Trim();
+        Console.WriteLine(currentHeading);
+    }
+
+    private void OnEditAuthor(AuthorDTO _authorDTO)
+    {
+        string _index = _authorDTO.Id.ToString();
+        navigationManager.NavigateTo($"/authors/edit/{_index}");
+    }
+
+    private void OnAddBookToAuthor(AuthorDTO _authorDTO)
+    {
+        string _index = _authorDTO.Id.ToString();
+        navigationManager.NavigateTo($"/authors/edit/{_index}");
+    }
+
+    private void OnAddAuthor()
+    {
+        navigationManager.NavigateTo($"/authors/add");
+    }
+
+}
