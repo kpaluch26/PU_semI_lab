@@ -134,5 +134,40 @@ namespace RepositoryPattern
                 return false;
             }
         }
+
+        public BookDTO EditBook(int index, BookRequestDTO _bookRequestDTO)
+        {
+            var book = db.Books.Include(x => x.Authors).Where(x => x.Id == index).Single();
+            {
+                book.Title = _bookRequestDTO.Title;
+                book.ReleaseDate = _bookRequestDTO.ReleaseDate;
+            };
+            if (_bookRequestDTO.AuthorsIDs == null)
+            {
+                book.Authors = new List<Author>();
+            }
+            else
+            {
+                book.Authors = db.Authors.Where(a => _bookRequestDTO.AuthorsIDs.Contains(a.Id)).ToList();
+            }
+            db.Books.Update(book);
+            db.SaveChanges();
+
+            return new BookDTO
+            {
+                ID = book.Id,
+                Title = book.Title,
+                ReleaseDate = book.ReleaseDate,
+                Authors = book.Authors.Select(a => new BookAuthorDTO
+                {
+                    Id = a.Id,
+                    FirstName = a.FirstName,
+                    SecondName = a.SecondName
+                }).ToList(),
+                AvarageRate = (book.Rates.Count() > 0 ? book.Rates.Average(r => r.Value) : 0),
+                RatesCount = (book.Rates.Count() > 0 ? book.Rates.Count() : 0),
+            };
+
+        }
     }
 }

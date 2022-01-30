@@ -3,6 +3,7 @@
 @using RepositoryPattern
 @using Model.DTO
 @inject BooksRepository booksRepository
+@inject NavigationManager navigationManager
 
 @if (books == null)
 {
@@ -94,16 +95,16 @@ else
 
     private void OnAddAuthorToBook(BookDTO _bookDTO)
     {
-
+        navigationManager.NavigateTo($"/books/edit/{_bookDTO.ID}");
     }
 
     private void OnEditBook(BookDTO _bookDTO)
     {
-
+        navigationManager.NavigateTo($"/books/edit/{_bookDTO.ID}");
     }
 
     private void OnAddBook()
     {
-
+        navigationManager.NavigateTo($"/books/add");
     }
 }

@@ -105,7 +105,7 @@ using Model.DTO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 51 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BooksTableView.razor"
+#line 53 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BooksTableView.razor"
        
     private string currentHeading = "All available books";
     private List<BookDTO> books;
@@ -125,7 +125,7 @@ using Model.DTO;
     {
         bool _result = booksRepository.AddRateToBook(_bookDTO.ID, _rate);
 
-        if(_result)
+        if (_result)
         {
             books = booksRepository.GetBooks(new PaginationDTO(0, 100));
             InvokeAsync(() => { this.StateHasChanged(); });
@@ -136,7 +136,7 @@ using Model.DTO;
     {
         bool _result = booksRepository.RemoveBook(_bookDTO.ID);
 
-        if(_result)
+        if (_result)
         {
             books.Remove(_bookDTO);
             InvokeAsync(() => { this.StateHasChanged(); });
@@ -151,17 +151,23 @@ using Model.DTO;
 
     private void OnAddAuthorToBook(BookDTO _bookDTO)
     {
-
+        navigationManager.NavigateTo($"/books/edit/{_bookDTO.ID}");
     }
 
     private void OnEditBook(BookDTO _bookDTO)
     {
+        navigationManager.NavigateTo($"/books/edit/{_bookDTO.ID}");
+    }
 
+    private void OnAddBook()
+    {
+        navigationManager.NavigateTo($"/books/add");
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private BooksRepository booksRepository { get; set; }
     }
 }

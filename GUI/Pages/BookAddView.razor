@@ -1,0 +1,65 @@
+﻿<h3>Add book data</h3>
+@page "/books/add"
+@using RepositoryPattern
+@using Model.DTO
+@using Radzen
+@using Radzen.Blazor
+@inject BooksRepository booksRepository
+@inject AuthorRepository authorRepository
+@inject NavigationManager navigatorManager
+
+
+<EditForm Model="book" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <label>Title:</label>
+    <InputText @bind-Value="book.Title" />
+
+    <label>Release Date:</label>
+    <RadzenDatePicker TValue="DateTime" ShowTime="true" HourFormat="12" DateFormat="MM/dd/yyyy h:mm tt" @bind-Value=book.ReleaseDate />
+
+    <div class="col-md-6 col-lg-4 col-xl-3 p-3">
+        <RadzenCard>
+            <h4 class="mb-4">Authors selection</h4>
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            @bind-Value=@multipleValues Multiple="true" Placeholder="Select..." Data=@authors TextProperty="SecondName" ValueProperty="Id"
+                            Change=@(args => OnChange(args, "Authors ID:")) Class="w-auto" />
+        </RadzenCard>
+    </div>
+
+    <button>Add book</button>
+</EditForm>
+
+
+@code {
+    private BookRequestDTO book = new BookRequestDTO();
+
+    private IEnumerable<AuthorDTO> authors;
+
+    private IEnumerable<int> multipleValues = new int[] { };
+
+    protected override void OnInitialized()
+    {
+        authors = authorRepository.GetAuthors(new PaginationDTO(0, 100));
+    }
+
+    private void OnChange(object value, string name)
+    {
+        if (multipleValues != null)
+        {
+            foreach (var _result in multipleValues)
+            {
+                Console.WriteLine($"{name} {_result.ToString()}");
+            }
+        }
+    }
+
+    private void OnSubmit()
+    {
+        book.AuthorsIDs = multipleValues.ToList();
+        booksRepository.PostBook(book);
+        navigatorManager.NavigateTo($"/books");
+    }
+
+}

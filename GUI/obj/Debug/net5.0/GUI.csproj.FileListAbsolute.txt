@@ -107,3 +107,7 @@ D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\bin\Debug\net5.0
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\bin\Debug\net5.0\System.IO.Pipelines.dll
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\obj\Debug\net5.0\RazorDeclaration\Pages\AuthorAddView.razor.g.cs
 D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\obj\Debug\net5.0\Razor\Pages\AuthorAddView.razor.g.cs
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\obj\Debug\net5.0\RazorDeclaration\Pages\BookEditView.razor.g.cs
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\obj\Debug\net5.0\Razor\Pages\BookEditView.razor.g.cs
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\obj\Debug\net5.0\RazorDeclaration\Pages\BookAddView.razor.g.cs
+D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\obj\Debug\net5.0\Razor\Pages\BookAddView.razor.g.cs

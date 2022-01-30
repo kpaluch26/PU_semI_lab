@@ -33,8 +33,8 @@
 
 
 @code {
-    [Parameter]
-    public string index { get; set; }
+        [Parameter]
+        public string index { get; set; }
 
     private AuthorRequestDTO author = new AuthorRequestDTO();
 
@@ -67,9 +67,12 @@
 
     private void OnChange(object value, string name)
     {
-        foreach (var _result in multipleValues)
+        if (multipleValues != null)
         {
-            Console.WriteLine($"{name} {_result.ToString()}");
+            foreach (var _result in multipleValues)
+            {
+                Console.WriteLine($"{name} {_result.ToString()}");
+            }
         }
     }
 

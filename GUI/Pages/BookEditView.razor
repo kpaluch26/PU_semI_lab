@@ -1,0 +1,86 @@
+﻿<h3>Edit book data</h3>
+@page "/books/edit/{index}"
+@using RepositoryPattern
+@using Model.DTO
+@using Radzen
+@using Radzen.Blazor
+@inject AuthorRepository authorRepository
+@inject BooksRepository booksRepository
+@inject NavigationManager navigatorManager
+
+
+<EditForm Model="book" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <label>Title:</label>
+    <InputText @bind-Value="book.Title" />
+
+    <label>Release Date:</label>
+    <RadzenDatePicker TValue="DateTime" ShowTime="true" HourFormat="12" DateFormat="MM/dd/yyyy h:mm tt" @bind-Value=book.ReleaseDate />
+
+    <div class="col-md-6 col-lg-4 col-xl-3 p-3">
+        <RadzenCard>
+            <h4 class="mb-4">Authors selection</h4>
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            @bind-Value=@multipleValues Multiple="true" Placeholder="Select..." Data=@authors TextProperty="SecondName" ValueProperty="Id"
+                            Change=@(args => OnChange(args, "Authors ID:")) Class="w-auto" />
+        </RadzenCard>
+    </div>
+
+    <button>Confirm changes</button>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public string index { get; set; }
+
+    private BookRequestDTO book = new BookRequestDTO();
+
+    private IEnumerable<AuthorDTO> authors;
+
+    private IEnumerable<int> multipleValues = new int[] { };
+
+    protected override void OnInitialized()
+    {
+        var _book = booksRepository.GetBook(Int32.Parse(index));
+        authors = authorRepository.GetAuthors(new PaginationDTO(0, 100));
+
+        List<int> _authorsId = new List<int>();
+
+        if (_book != null)
+        {
+            book.Title = _book.Title;
+            book.ReleaseDate = _book.ReleaseDate;
+            var _authors = _book.Authors;
+
+            foreach (var _author in _authors)
+            {
+                _authorsId.Add(_author.Id);
+            }
+
+            book.AuthorsIDs = _authorsId;
+            multipleValues = _authorsId.ToArray();
+        }
+    }
+
+    private void OnChange(object value, string name)
+    {
+        if (multipleValues != null)
+        {
+            foreach (var _result in multipleValues)
+            {
+                Console.WriteLine($"{name} {_result.ToString()}");
+            }
+        }
+    }
+
+    private void OnSubmit()
+    {
+        book.AuthorsIDs = multipleValues.ToList();
+        booksRepository.EditBook(Int32.Parse(index), book);
+        navigatorManager.NavigateTo($"/books");
+    }
+
+}

@@ -83,35 +83,35 @@ using GUI.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\AuthorEditView.razor"
+#line 3 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookEditView.razor"
 using RepositoryPattern;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\AuthorEditView.razor"
+#line 4 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookEditView.razor"
 using Model.DTO;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\AuthorEditView.razor"
+#line 5 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookEditView.razor"
 using Radzen;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\AuthorEditView.razor"
+#line 6 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookEditView.razor"
 using Radzen.Blazor;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/authors/edit/{index}")]
-    public partial class AuthorEditView : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/books/edit/{index}")]
+    public partial class BookEditView : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -119,37 +119,37 @@ using Radzen.Blazor;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 35 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\AuthorEditView.razor"
+#line 35 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookEditView.razor"
        
-        [Parameter]
-        public string index { get; set; }
+    [Parameter]
+    public string index { get; set; }
 
-    private AuthorRequestDTO author = new AuthorRequestDTO();
+    private BookRequestDTO book = new BookRequestDTO();
 
-    private IEnumerable<BookDTO> books;
+    private IEnumerable<AuthorDTO> authors;
 
-    private IEnumerable<int> multipleValues = new int[] {};
+    private IEnumerable<int> multipleValues = new int[] { };
 
     protected override void OnInitialized()
     {
-        var _author = authorRepository.GetAuthor(Int32.Parse(index));
-        books = booksRepository.GetBooks(new PaginationDTO(0, 100));
+        var _book = booksRepository.GetBook(Int32.Parse(index));
+        authors = authorRepository.GetAuthors(new PaginationDTO(0, 100));
 
-        List<int> _booksId = new List<int>();
+        List<int> _authorsId = new List<int>();
 
-        if (_author != null)
+        if (_book != null)
         {
-            author.FirstName = _author.FirstName;
-            author.SecondName = _author.SecondName;
-            var _books = _author.Books;
+            book.Title = _book.Title;
+            book.ReleaseDate = _book.ReleaseDate;
+            var _authors = _book.Authors;
 
-            foreach (var _book in _books)
+            foreach (var _author in _authors)
             {
-                _booksId.Add(_book.Id);
+                _authorsId.Add(_author.Id);
             }
 
-            author.BooksId = _booksId;
-            multipleValues = _booksId.ToArray();
+            book.AuthorsIDs = _authorsId;
+            multipleValues = _authorsId.ToArray();
         }
     }
 
@@ -166,9 +166,9 @@ using Radzen.Blazor;
 
     private void OnSubmit()
     {
-        author.BooksId = multipleValues.ToList();
-        authorRepository.EditAuthor(Int32.Parse(index), author);
-        navigatorManager.NavigateTo($"/authors");
+        book.AuthorsIDs = multipleValues.ToList();
+        booksRepository.EditBook(Int32.Parse(index), book);
+        navigatorManager.NavigateTo($"/books");
     }
 
 

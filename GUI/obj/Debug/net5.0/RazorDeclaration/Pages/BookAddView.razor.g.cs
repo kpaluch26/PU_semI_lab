@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace GUI.Shared
+namespace GUI.Pages
 {
     #line hidden
     using System;
@@ -82,7 +82,36 @@ using GUI.Shared;
 #line default
 #line hidden
 #nullable disable
-    public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 3 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookAddView.razor"
+using RepositoryPattern;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookAddView.razor"
+using Model.DTO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookAddView.razor"
+using Radzen;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookAddView.razor"
+using Radzen.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/books/add")]
+    public partial class BookAddView : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -90,20 +119,44 @@ using GUI.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 24 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Shared\NavMenu.razor"
+#line 35 "D:\studia_II_stopien\PU\LAB\LAB_1\ProgramowanieUzytkoweIP12\GUI\Pages\BookAddView.razor"
        
-    private bool collapseNavMenu = true;
+    private BookRequestDTO book = new BookRequestDTO();
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private IEnumerable<AuthorDTO> authors;
 
-    private void ToggleNavMenu()
+    private IEnumerable<int> multipleValues = new int[] { };
+
+    protected override void OnInitialized()
     {
-        collapseNavMenu = !collapseNavMenu;
+        authors = authorRepository.GetAuthors(new PaginationDTO(0, 100));
     }
+
+    private void OnChange(object value, string name)
+    {
+        if (multipleValues != null)
+        {
+            foreach (var _result in multipleValues)
+            {
+                Console.WriteLine($"{name} {_result.ToString()}");
+            }
+        }
+    }
+
+    private void OnSubmit()
+    {
+        book.AuthorsIDs = multipleValues.ToList();
+        booksRepository.PostBook(book);
+        navigatorManager.NavigateTo($"/books");
+    }
+
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigatorManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthorRepository authorRepository { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private BooksRepository booksRepository { get; set; }
     }
 }
 #pragma warning restore 1591
